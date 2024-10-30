@@ -1,0 +1,20 @@
+% Algoritmo en Octave para obtener la forma real de Schur
+% Matriz de entrada A debe ser cuadrada y real
+
+function [Q, T] = descomposicion_schur_real(A)
+    % Verifica si la matriz es cuadrada
+    [m, n] = size(A);
+    if m ~= n
+        error('La matriz debe ser cuadrada');
+    end
+    
+    % Paso 1: Realiza la descomposición de Schur en números complejos
+    [Q_complex, T_complex] = schur(A, 'complex');
+    
+    % Paso 2: Convierte la descomposición a formas reales
+    [Q_real, T_real] = cdf2rdf(Q_complex, T_complex);
+    
+    % Asigna las matrices finales
+    Q = Q_real;
+    T = T_real;
+end
